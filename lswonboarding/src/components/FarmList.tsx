@@ -1,7 +1,6 @@
 import useFetch from "../customHooks/useFetch"
 import Farm from "./Farm"
 import { Grid } from "@mui/material";
-import { css } from '@emotion/react';
 
 interface FarmSchema {
     name: string;
