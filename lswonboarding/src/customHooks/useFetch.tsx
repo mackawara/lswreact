@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
-const useFetch = (url: string) => {
+const useFetch = () => {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState({});
-
+    const [error, setError] = useState('');
+    //  console.log(url)
+    const url = `http://localhost:4000/farms`
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -17,20 +18,19 @@ const useFetch = (url: string) => {
 
 
                 const jsonData = await response.json();
-
-
-                setData(jsonData);
+                setData(jsonData.data);
                 setLoading(false);
+                //  setError(null)
 
             } catch (error) {
-              
-                setError({message:'Something went wrong'});
+
                 setLoading(false);
+                setError(`something wrong`);
+
             }
         };
-
         fetchData();
-    });
+    }, [data, url])
 
     return { data, loading, error };
 };
